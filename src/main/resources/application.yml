@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: spring-boot-mongoDb
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/
+      database: bookStore
+
+server:
+  port: 9090
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+            repository:
+              query:
+                MongoQuery: DEBUG
+    com:
+      mongodb: DEBUG
+
+security:
+  jwt:
+    secret-key: somesecretofapp
+    expiration-time: 3600000

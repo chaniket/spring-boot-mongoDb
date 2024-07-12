@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +25,11 @@ public class MongoGroceryController {
 	@Autowired
 	MongoGroceryService groceryService;
 
+	@PostMapping("/save")
+	public GroceryItem saveGrocery(@RequestBody GroceryItem groceryItem) {
+		return groceryService.saveGroceryDetails(groceryItem);
+	}
+	
 	@GetMapping("/items")
 	public List<GroceryItem> showAllGroceryItems() {
 		return groceryService.showAllGroceryItems();
@@ -36,6 +43,13 @@ public class MongoGroceryController {
 	@GetMapping("/items/category")
 	public List<GroceryItem> getItemsByCategory(@RequestParam String category) {
 		return groceryService.getItemsByCategory(category);
+	}
+	
+	@GetMapping("/items/byCategoryAndName")
+	public List<GroceryItem> getItemsByCategoryAndItemByName(@RequestParam String category,@RequestParam String name
+			,@RequestParam long quantity
+			) {
+		return groceryService.getItemsByCategoryAndItemByName(category,name,quantity);
 	}
 
 	@GetMapping("/items/count")

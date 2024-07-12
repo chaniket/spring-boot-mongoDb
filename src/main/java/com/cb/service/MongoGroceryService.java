@@ -97,4 +97,16 @@ public class MongoGroceryService {
 		return itemsUpdated;
 	}
 
+	public List<GroceryItem> getItemsByCategoryAndItemByName(String category, String name, long quantity) {
+		//System.out.println(groceryItemRepo.findByName(name));
+		return groceryItemRepo.findByNameAndQuantityGreaterThan(name,quantity);
+	}
+
+	@Transactional
+	@Loggable
+	public GroceryItem saveGroceryDetails(GroceryItem groceryItem) {
+		groceryItem = groceryItemRepo.save(groceryItem);
+		return groceryItem;
+	}
+
 }
